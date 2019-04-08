@@ -1,0 +1,239 @@
+{
+  "attributes" : {
+    "id" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    },
+    "street" : {
+      "type" : "string"
+    },
+    "city" : {
+      "type" : "string"
+    },
+    "state" : {
+      "type" : "string"
+    },
+    "postal_code" : {
+      "type" : "string"
+    }
+  },
+  "resolvers" : {
+    "id" : {
+      "attributes" : [
+        "id"
+      ]
+    },
+    "name_phone" : {
+      "attributes" : [
+        "name",
+        "phone"
+      ]
+    },
+    "name_street" : {
+      "attributes" : [
+        "name",
+        "street"
+      ]
+    },
+    "name_city_state" : {
+      "attributes" : [
+        "name",
+        "city",
+        "state"
+      ]
+    },
+    "name_postal_code" : {
+      "attributes" : [
+        "name",
+        "postal_code"
+      ]
+    }
+  },
+  "matchers" : {
+    "match" : {
+      "clause" : {
+        "match" : {
+          "{{ field }}" : "{{ value }}"
+        }
+      }
+    },
+    "match_fuzzy" : {
+      "clause" : {
+        "match" : {
+          "{{ field }}" : {
+            "query" : "{{ value }}",
+            "fuzziness" : "{{ params.fuzziness }}"
+          }
+        }
+      },
+      "params" : {
+        "fuzziness" : 1
+      }
+    },
+    "match_fuzzy_and_initials" : {
+      "clause" : {
+        "bool": {
+          "filter": [
+            {
+              "match" : {
+                "{{ field }}" : {
+                  "query" : "{{ value }}",
+                  "fuzziness" : "{{ params.fuzziness }}"
+                }
+              }
+            },
+            {
+              "match" : {
+                "{{ field }}.initials" : {
+                  "query" : "{{ value }}",
+                  "fuzziness" : "auto"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "params" : {
+        "fuzziness" : 1
+      }
+    },
+    "term" : {
+      "clause" : {
+        "term" : {
+          "{{ field }}" : "{{ value }}"
+        }
+      }
+    }
+  },
+  "indices" : {
+    "zentity_sandbox_leie" : {
+      "fields" : {
+        "npi" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "busname" : {
+          "attribute" : "name",
+          "matcher" : "match_fuzzy_and_initials"
+        },
+        "busname.phonetic" : {
+          "attribute" : "name",
+          "matcher" : "match"
+        },
+        "address" : {
+          "attribute" : "street",
+          "matcher" : "match_fuzzy"
+        },
+        "city" : {
+          "attribute" : "city",
+          "matcher" : "match_fuzzy"
+        },
+        "state" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        },
+        "zip" : {
+          "attribute" : "postal_code",
+          "matcher" : "match_fuzzy"
+        }
+      }
+    },
+    "zentity_sandbox_nppes" : {
+      "fields" : {
+        "number" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "basic.organization_name" : {
+          "attribute" : "name",
+          "matcher" : "match_fuzzy_and_initials"
+        },
+        "basic.organization_name.phonetic" : {
+          "attribute" : "name",
+          "matcher" : "match"
+        },
+        "addresses.location.telephone_number" : {
+          "attribute" : "phone",
+          "matcher" : "match_fuzzy"
+        },
+        "addresses.location.address_1" : {
+          "attribute" : "street",
+          "matcher" : "match_fuzzy"
+        },
+        "addresses.location.city" : {
+          "attribute" : "city",
+          "matcher" : "match_fuzzy"
+        },
+        "addresses.location.state" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        },
+        "addresses.location.postal_code" : {
+          "attribute" : "postal_code",
+          "matcher" : "match_fuzzy"
+        }
+      }
+    },
+    "zentity_sandbox_pecos_enrollment" : {
+      "fields" : {
+        "npi" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "org_name" : {
+          "attribute" : "name",
+          "matcher" : "match_fuzzy_and_initials"
+        },
+        "org_name.phonetic" : {
+          "attribute" : "name",
+          "matcher" : "match"
+        },
+        "state_cd" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        }
+      }
+    },
+    "zentity_sandbox_physician_compare" : {
+      "fields" : {
+        "npi" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "org_nm" : {
+          "attribute" : "name",
+          "matcher" : "match_fuzzy_and_initials"
+        },
+        "org_nm.phonetic" : {
+          "attribute" : "name",
+          "matcher" : "match"
+        },
+        "adr_ln_1" : {
+          "attribute" : "street",
+          "matcher" : "match_fuzzy"
+        },
+        "cty" : {
+          "attribute" : "city",
+          "matcher" : "match_fuzzy"
+        },
+        "st" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        },
+        "zip" : {
+          "attribute" : "postal_code",
+          "matcher" : "match_fuzzy"
+        },
+        "phn_numbr" : {
+          "attribute" : "phone",
+          "matcher" : "match_fuzzy"
+        }
+      }
+    }
+  }
+}

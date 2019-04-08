@@ -1,0 +1,246 @@
+{
+  "attributes" : {
+    "id" : {
+      "type" : "string"
+    },
+    "first_name" : {
+      "type" : "string"
+    },
+    "last_name" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    },
+    "street" : {
+      "type" : "string"
+    },
+    "city" : {
+      "type" : "string"
+    },
+    "state" : {
+      "type" : "string"
+    },
+    "postal_code" : {
+      "type" : "string"
+    }
+  },
+  "resolvers" : {
+    "id" : {
+      "attributes" : [
+        "id"
+      ]
+    },
+    "name_phone" : {
+      "attributes" : [
+        "first_name",
+        "last_name",
+        "phone"
+      ]
+    },
+    "name_street_city_state" : {
+      "attributes" : [
+        "first_name",
+        "last_name",
+        "street",
+        "city",
+        "state"
+      ]
+    },
+    "name_street_postal_code" : {
+      "attributes" : [
+        "first_name",
+        "last_name",
+        "street",
+        "postal_code"
+      ]
+    }
+  },
+  "matchers" : {
+    "match_fuzzy" : {
+      "clause" : {
+        "match" : {
+          "{{ field }}" : {
+            "query" : "{{ value }}",
+            "fuzziness" : "{{ params.fuzziness }}"
+          }
+        }
+      },
+      "params" : {
+        "fuzziness" : 1
+      }
+    },
+    "match" : {
+      "clause" : {
+        "match" : {
+          "{{ field }}" : "{{ value }}"
+        }
+      }
+    },
+    "term" : {
+      "clause" : {
+        "term" : {
+          "{{ field }}" : "{{ value }}"
+        }
+      }
+    }
+  },
+  "indices" : {
+    "zentity_sandbox_leie" : {
+      "fields" : {
+        "npi" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "firstname" : {
+          "attribute" : "first_name",
+          "matcher" : "match_fuzzy"
+        },
+        "firstname.phonetic" : {
+          "attribute" : "first_name",
+          "matcher" : "match"
+        },
+        "lastname" : {
+          "attribute" : "last_name",
+          "matcher" : "match_fuzzy"
+        },
+        "lastname.phonetic" : {
+          "attribute" : "last_name",
+          "matcher" : "match"
+        },
+        "address" : {
+          "attribute" : "street",
+          "matcher" : "match_fuzzy"
+        },
+        "city" : {
+          "attribute" : "city",
+          "matcher" : "match_fuzzy"
+        },
+        "state" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        },
+        "zip" : {
+          "attribute" : "postal_code",
+          "matcher" : "match_fuzzy"
+        }
+      }
+    },
+    "zentity_sandbox_nppes" : {
+      "fields" : {
+        "number" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "basic.first_name" : {
+          "attribute" : "first_name",
+          "matcher" : "match_fuzzy"
+        },
+        "basic.first_name.phonetic" : {
+          "attribute" : "first_name",
+          "matcher" : "match"
+        },
+        "basic.last_name" : {
+          "attribute" : "last_name",
+          "matcher" : "match_fuzzy"
+        },
+        "basic.last_name.phonetic" : {
+          "attribute" : "last_name",
+          "matcher" : "match"
+        },
+        "addresses.location.telephone_number" : {
+          "attribute" : "phone",
+          "matcher" : "match_fuzzy"
+        },
+        "addresses.location.address_1" : {
+          "attribute" : "street",
+          "matcher" : "match_fuzzy"
+        },
+        "addresses.location.city" : {
+          "attribute" : "city",
+          "matcher" : "match_fuzzy"
+        },
+        "addresses.location.state" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        },
+        "addresses.location.postal_code" : {
+          "attribute" : "postal_code",
+          "matcher" : "match_fuzzy"
+        }
+      }
+    },
+    "zentity_sandbox_pecos_enrollment" : {
+      "fields" : {
+        "npi" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "first_name" : {
+          "attribute" : "first_name",
+          "matcher" : "match_fuzzy"
+        },
+        "first_name.phonetic" : {
+          "attribute" : "first_name",
+          "matcher" : "match"
+        },
+        "last_name" : {
+          "attribute" : "last_name",
+          "matcher" : "match_fuzzy"
+        },
+        "last_name.phonetic" : {
+          "attribute" : "last_name",
+          "matcher" : "match"
+        },
+        "state_cd" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        }
+      }
+    },
+    "zentity_sandbox_physician_compare" : {
+      "fields" : {
+        "npi" : {
+          "attribute" : "id",
+          "matcher" : "term"
+        },
+        "frst_nm" : {
+          "attribute" : "first_name",
+          "matcher" : "match_fuzzy"
+        },
+        "frst_nm.phonetic" : {
+          "attribute" : "first_name",
+          "matcher" : "match"
+        },
+        "lst_nm" : {
+          "attribute" : "last_name",
+          "matcher" : "match_fuzzy"
+        },
+        "lst_nm.phonetic" : {
+          "attribute" : "last_name",
+          "matcher" : "match"
+        },
+        "adr_ln_1" : {
+          "attribute" : "street",
+          "matcher" : "match_fuzzy"
+        },
+        "cty" : {
+          "attribute" : "city",
+          "matcher" : "match_fuzzy"
+        },
+        "st" : {
+          "attribute" : "state",
+          "matcher" : "term"
+        },
+        "zip" : {
+          "attribute" : "postal_code",
+          "matcher" : "match_fuzzy"
+        },
+        "phn_numbr" : {
+          "attribute" : "phone",
+          "matcher" : "match_fuzzy"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "index_patterns": ["zentity_sandbox_pecos_enrollment*"],
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "index.codec": "best_compression",
+    "index.refresh_interval": "5s",
+    "analysis": {
+      "filter": {
+        "zentity_clean_white": {
+          "type": "pattern_replace",
+          "pattern": " +",
+          "replacement": " "
+        },
+        "zentity_initialize": {
+          "type": "pattern_replace",
+          "pattern": "^(.).*",
+          "replacement": "$1"
+        },
+        "zentity_phonetic": {
+          "type": "phonetic",
+          "encoder": "nysiis"
+        },
+        "zentity_punct_white": {
+          "type": "pattern_replace",
+          "pattern": "\\p{Punct}",
+          "replacement": " "
+        },
+        "zentity_remove_apostrophes": {
+          "type": "pattern_replace",
+          "pattern": "'",
+          "replacement": ""
+        },
+        "zentity_remove_one_char_tokens": {
+          "type": "length",
+          "min": 2
+        },
+        "zentity_remove_white": {
+          "type": "pattern_replace",
+          "pattern": " +",
+          "replacement": ""
+        }
+      },
+      "analyzer": {
+        "zentity_name": {
+          "tokenizer": "standard",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "stop",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "trim",
+            "fingerprint"
+          ]
+        },
+        "zentity_name_initials": {
+          "tokenizer": "standard",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "stop",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "zentity_remove_one_char_tokens",
+            "zentity_initialize",
+            "fingerprint",
+            "zentity_remove_white"
+          ]
+        },
+        "zentity_name_phonetic": {
+          "tokenizer": "standard",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "stop",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "trim",
+            "zentity_phonetic",
+            "fingerprint"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_doc": {
+      "_all": {
+				"enabled": false
+			},
+      "properties": {
+        "npi": {
+          "type": "keyword"
+        },
+        "pecos_asct_cntl_id": {
+          "type": "keyword"
+        },
+        "enrlmnt_id": {
+          "type": "keyword"
+        },
+        "provider_type_cd": {
+          "type": "keyword"
+        },
+        "provider_type_desc": {
+          "type": "keyword"
+        },
+        "state_cd": {
+          "type": "keyword"
+        },
+        "first_name": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "mdl_name": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "last_name": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "org_name": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "initials": {
+              "type": "text",
+              "analyzer": "zentity_name_initials"
+            },
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "gndr_sw": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

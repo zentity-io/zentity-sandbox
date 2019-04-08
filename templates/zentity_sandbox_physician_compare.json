@@ -1,0 +1,327 @@
+{
+  "index_patterns": ["zentity_sandbox_physician_compare*"],
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "index.codec": "best_compression",
+    "index.refresh_interval": "5s",
+    "analysis": {
+      "char_filter": {
+        "zentity_phone_char_map": {
+          "type": "mapping",
+          "mappings": [
+            "A => 2", "a => 2",
+            "B => 2", "b => 2",
+            "C => 2", "c => 2",
+            "D => 3", "d => 3",
+            "E => 3", "e => 3",
+            "F => 3", "f => 3",
+            "G => 4", "g => 4",
+            "H => 4", "h => 4",
+            "I => 4", "i => 4",
+            "J => 5", "j => 5",
+            "K => 5", "k => 5",
+            "L => 5", "l => 5",
+            "M => 6", "m => 6",
+            "N => 6", "n => 6",
+            "O => 6", "o => 6",
+            "P => 7", "p => 7",
+            "Q => 7", "q => 7",
+            "R => 7", "r => 7",
+            "S => 7", "s => 7",
+            "T => 8", "t => 8",
+            "U => 8", "u => 8",
+            "V => 8", "v => 8",
+            "W => 9", "w => 9",
+            "X => 9", "x => 9",
+            "Y => 9", "y => 9",
+            "Z => 9", "z => 9"
+          ]
+        }
+      },
+      "filter": {
+        "zentity_clean_white": {
+          "type": "pattern_replace",
+          "pattern": " +",
+          "replacement": " "
+        },
+        "zentity_initialize": {
+          "type": "pattern_replace",
+          "pattern": "^(.).*",
+          "replacement": "$1"
+        },
+        "zentity_phonetic": {
+          "type": "phonetic",
+          "encoder": "nysiis"
+        },
+        "zentity_punct_white": {
+          "type": "pattern_replace",
+          "pattern": "\\p{Punct}",
+          "replacement": " "
+        },
+        "zentity_remove_apostrophes": {
+          "type": "pattern_replace",
+          "pattern": "'",
+          "replacement": ""
+        },
+        "zentity_remove_non_digits": {
+          "type": "pattern_replace",
+          "pattern": "[^\\d]",
+          "replacement": ""
+        },
+        "zentity_remove_one_char_tokens": {
+          "type": "length",
+          "min": 2
+        },
+        "zentity_remove_street_suffix": {
+          "type": "pattern_replace",
+          "pattern": "^(\\d+ ([^ ]+ )+)(allee|alley|ally|aly|anex|annex|annx|anx|arc|arcade|av|ave|aven|avenu|avenue|avn|avnue|bayoo|bayou|bch|beach|bend|bg|bgs|blf|blfs|bluf|bluff|bluffs|blvd|bnd|bot|bottm|bottom|boul|boulevard|boulv|br|branch|brdge|brg|bridge|brk|brks|brnch|brook|brooke|brookes|brooks|btm|burg|burgs|byp|bypa|bypas|bypass|byps|byu|camp|canyn|canyon|cape|causeway|causwa|cen|cent|center|centers|centr|centre|cir|circ|circl|circle|circles|cirs|clb|clf|clfs|cliff|cliffs|club|cmn|cmns|cmp|cnter|cntr|cnyn|common|commons|cor|corner|corners|cors|course|court|courts|cove|coves|cp|cpe|crcl|crcle|creek|cres|crescent|crest|crk|crossing|crossroad|crossroads|crse|crsent|crsnt|crssng|crst|cswy|ct|ctr|ctrs|cts|curv|curve|cv|cvs|cyn|dale|dam|div|divide|dl|dm|dr|driv|drive|drives|drs|drv|dv|dvd|est|estate|estates|ests|exp|expr|express|expressway|expw|expy|ext|extension|extensions|extn|extnsn|exts|fall|falls|ferry|field|fields|flat|flats|fld|flds|fls|flt|flts|ford|fords|forest|forests|forg|forge|forges|fork|forks|fort|frd|frds|freeway|freewy|frg|frgs|frk|frks|frry|frst|frt|frway|frwy|fry|ft|fwy|garden|gardens|gardn|gateway|gatewy|gatway|gdn|gdns|glen|glens|gln|glns|grden|grdn|grdns|green|greens|grn|grns|grov|grove|groves|grv|grvs|gtway|gtwy|harb|harbor|harbors|harbour|harbours|harbr|haven|hbr|hbrs|heights|highway|highwy|hill|hills|hiway|hiwy|hl|hllw|hls|hollow|hollows|holw|holws|hrbor|ht|hts|hvn|hway|hwy|inlet|inlt|is|island|islands|isle|isles|islnd|islnds|iss|jct|jction|jctn|jctns|jcts|junction|junctions|junctn|juncton|key|keys|knl|knls|knol|knoll|knolls|ky|kys|lake|lakes|land|landing|lane|lck|lcks|ldg|ldge|lf|lgt|lgts|light|lights|lk|lks|ln|lndg|lndng|loaf|lock|locks|lodg|lodge|loop|loops|mall|manor|manors|mdw|mdws|meadow|meadows|medows|mews|mill|mills|mission|missn|ml|mls|mnr|mnrs|mnt|mntain|mntn|mntns|motorway|mount|mountain|mountains|mountin|msn|mssn|mt|mtin|mtn|mtns|mtwy|nck|neck|opas|orch|orchard|orchrd|oval|overpass|ovl|park|parks|parkway|parkways|parkwy|pass|passage|path|paths|pike|pikes|pine|pines|pkway|pkwy|pkwys|pky|pl|place|plain|plains|plaza|pln|plns|plz|plza|pne|pnes|point|points|port|ports|pr|prairie|prk|prr|prt|prts|psge|pt|pts|rad|radial|radiel|radl|ramp|ranch|ranches|rapid|rapids|rd|rdg|rdge|rdgs|rds|rest|ridge|ridges|riv|river|rivr|rnch|rnchs|road|roads|route|row|rpd|rpds|rst|rte|rue|run|rvr|shl|shls|shoal|shoals|shoar|shoars|shore|shores|shr|shrs|skwy|skyway|smt|spg|spgs|spng|spngs|spring|springs|sprng|sprngs|spur|spurs|sq|sqr|sqre|sqrs|sqs|squ|square|squares|st|sta|station|statn|stn|str|stra|strav|straven|stravenue|stravn|stream|street|streets|streme|strm|strt|strvn|strvnue|sts|sumit|sumitt|summit|ter|terr|terrace|throughway|tpke|trace|traces|track|tracks|trafficway|trail|trailer|trails|trak|trce|trfy|trk|trks|trl|trlr|trlrs|trls|trnpk|trwy|tunel|tunl|tunls|tunnel|tunnels|tunnl|turnpike|turnpk|un|underpass|union|unions|uns|upas|valley|valleys|vally|vdct|via|viadct|viaduct|view|views|vill|villag|village|villages|ville|villg|villiage|vis|vist|vista|vl|vlg|vlgs|vlly|vly|vlys|vst|vsta|vw|vws|walk|walks|wall|way|ways|well|wells|wl|wls|wy|xing|xrd|xrds)$",
+          "replacement": "$1"
+        },
+        "zentity_remove_white": {
+          "type": "pattern_replace",
+          "pattern": " +",
+          "replacement": ""
+        },
+        "zentity_truncate_postal_code": {
+          "type": "truncate",
+          "length": 5
+        }
+      },
+      "analyzer": {
+        "zentity_name": {
+          "tokenizer": "standard",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "stop",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "trim",
+            "fingerprint"
+          ]
+        },
+        "zentity_name_initials": {
+          "tokenizer": "standard",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "stop",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "zentity_remove_one_char_tokens",
+            "zentity_initialize",
+            "fingerprint",
+            "zentity_remove_white"
+          ]
+        },
+        "zentity_name_phonetic": {
+          "tokenizer": "standard",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "stop",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "trim",
+            "zentity_phonetic",
+            "fingerprint"
+          ]
+        },
+        "zentity_us_phone": {
+          "tokenizer": "keyword",
+          "char_filter": [
+            "zentity_phone_char_map"
+          ],
+          "filter": [
+            "trim",
+            "zentity_remove_non_digits"
+          ]
+        },
+        "zentity_us_postal_code": {
+          "tokenizer": "keyword",
+          "filter": [
+            "trim",
+            "zentity_remove_non_digits",
+            "zentity_truncate_postal_code"
+          ]
+        },
+        "zentity_us_street": {
+          "tokenizer": "keyword",
+          "filter": [
+            "icu_normalizer",
+            "icu_folding",
+            "zentity_remove_apostrophes",
+            "zentity_punct_white",
+            "zentity_clean_white",
+            "zentity_remove_street_suffix",
+            "trim"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_doc": {
+      "_all": {
+				"enabled": false
+			},
+      "properties": {
+        "npi": {
+          "type": "keyword"
+        },
+        "ind_pac_id": {
+          "type": "keyword"
+        },
+        "ind_enrl_id": {
+          "type": "keyword"
+        },
+        "lst_nm": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "frst_nm": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "mid_nm": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "suff": {
+          "type": "keyword"
+        },
+        "gndr": {
+          "type": "keyword"
+        },
+        "cred": {
+          "type": "keyword"
+        },
+        "med_sch": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "initials": {
+              "type": "text",
+              "analyzer": "zentity_name_initials"
+            },
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "grd_yr": {
+          "type": "keyword"
+        },
+        "pri_spec": {
+          "type": "keyword"
+        },
+        "sec_spec": {
+          "type": "keyword"
+        },
+        "org_nm": {
+          "type": "text",
+          "analyzer": "zentity_name",
+          "fields": {
+            "initials": {
+              "type": "text",
+              "analyzer": "zentity_name_initials"
+            },
+            "phonetic": {
+              "type": "text",
+              "analyzer": "zentity_name_phonetic"
+            }
+          }
+        },
+        "org_pac_id": {
+          "type": "keyword"
+        },
+        "num_org_mem": {
+          "type": "integer"
+        },
+        "adr_ln_1": {
+          "type": "text",
+          "analyzer": "zentity_us_street"
+        },
+        "adr_ln_2": {
+          "type": "text",
+          "analyzer": "zentity_us_street"
+        },
+        "ln_2_sprs": {
+          "type": "boolean"
+        },
+        "cty": {
+          "type": "text",
+          "analyzer": "zentity_name"
+        },
+        "st": {
+          "type": "keyword"
+        },
+        "zip": {
+          "type": "text",
+          "analyzer": "zentity_us_postal_code"
+        },
+        "phn_numbr": {
+          "type": "text",
+          "analyzer": "zentity_us_phone"
+        },
+        "hosp_affl": {
+          "type": "nested",
+          "properties": {
+            "ccn": {
+              "type": "keyword"
+            },
+            "lbn": {
+              "type": "text",
+              "analyzer": "zentity_name",
+              "fields": {
+                "initials": {
+                  "type": "text",
+                  "analyzer": "zentity_name_initials"
+                },
+                "phonetic": {
+                  "type": "text",
+                  "analyzer": "zentity_name_phonetic"
+                }
+              }
+            }
+          }
+        },
+        "assgn": {
+          "type": "boolean"
+        },
+        "pqrs": {
+          "type": "boolean"
+        },
+        "ehr": {
+          "type": "boolean"
+        },
+        "mhi": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
