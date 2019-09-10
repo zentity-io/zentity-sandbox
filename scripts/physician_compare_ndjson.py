@@ -39,9 +39,6 @@ Physician Compare Row Structure
 35 hosp_afl_5
 36 hosp_afl_lbn_5
 37 assgn
-38 PQRS
-39 EHR
-40 MHI
 """
 
 import csv
@@ -160,27 +157,6 @@ def row_to_doc(row):
             doc["assgn"] = False
         else:
             doc["assgn"] = None
-    if row[38]:
-        if row[38] == "Y":
-            doc["pqrs"] = True
-        if row[38] == "N":
-            doc["pqrs"] = False
-        else:
-            doc["pqrs"] = None
-    if row[39]:
-        if row[39] == "Y":
-            doc["ehr"] = True
-        if row[39] == "N":
-            doc["ehr"] = False
-        else:
-            doc["ehr"] = None
-    if row[40]:
-        if row[40] == "Y":
-            doc["mhi"] = True
-        if row[40] == "N":
-            doc["mhi"] = False
-        else:
-            doc["mhi"] = None
     return doc
 
 with open(FILENAME_INPUT, "rb") as input:

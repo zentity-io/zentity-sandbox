@@ -5,6 +5,7 @@
     "number_of_replicas": 0,
     "index.codec": "best_compression",
     "index.refresh_interval": "5s",
+    "index.translog.retention.age": "10s",
     "analysis": {
       "char_filter": {
         "zentity_phone_char_map": {
@@ -165,162 +166,148 @@
     }
   },
   "mappings": {
-    "_doc": {
-      "_all": {
-				"enabled": false
-			},
-      "properties": {
-        "npi": {
-          "type": "keyword"
-        },
-        "ind_pac_id": {
-          "type": "keyword"
-        },
-        "ind_enrl_id": {
-          "type": "keyword"
-        },
-        "lst_nm": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
+    "properties": {
+      "npi": {
+        "type": "keyword"
+      },
+      "ind_pac_id": {
+        "type": "keyword"
+      },
+      "ind_enrl_id": {
+        "type": "keyword"
+      },
+      "lst_nm": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
           }
-        },
-        "frst_nm": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
+        }
+      },
+      "frst_nm": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
           }
-        },
-        "mid_nm": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
+        }
+      },
+      "mid_nm": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
           }
-        },
-        "suff": {
-          "type": "keyword"
-        },
-        "gndr": {
-          "type": "keyword"
-        },
-        "cred": {
-          "type": "keyword"
-        },
-        "med_sch": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "initials": {
-              "type": "text",
-              "analyzer": "zentity_name_initials"
-            },
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
+        }
+      },
+      "suff": {
+        "type": "keyword"
+      },
+      "gndr": {
+        "type": "keyword"
+      },
+      "cred": {
+        "type": "keyword"
+      },
+      "med_sch": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "initials": {
+            "type": "text",
+            "analyzer": "zentity_name_initials"
+          },
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
           }
-        },
-        "grd_yr": {
-          "type": "keyword"
-        },
-        "pri_spec": {
-          "type": "keyword"
-        },
-        "sec_spec": {
-          "type": "keyword"
-        },
-        "org_nm": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "initials": {
-              "type": "text",
-              "analyzer": "zentity_name_initials"
-            },
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
+        }
+      },
+      "grd_yr": {
+        "type": "keyword"
+      },
+      "pri_spec": {
+        "type": "keyword"
+      },
+      "sec_spec": {
+        "type": "keyword"
+      },
+      "org_nm": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "initials": {
+            "type": "text",
+            "analyzer": "zentity_name_initials"
+          },
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
           }
-        },
-        "org_pac_id": {
-          "type": "keyword"
-        },
-        "num_org_mem": {
-          "type": "integer"
-        },
-        "adr_ln_1": {
-          "type": "text",
-          "analyzer": "zentity_us_street"
-        },
-        "adr_ln_2": {
-          "type": "text",
-          "analyzer": "zentity_us_street"
-        },
-        "ln_2_sprs": {
-          "type": "boolean"
-        },
-        "cty": {
-          "type": "text",
-          "analyzer": "zentity_name"
-        },
-        "st": {
-          "type": "keyword"
-        },
-        "zip": {
-          "type": "text",
-          "analyzer": "zentity_us_postal_code"
-        },
-        "phn_numbr": {
-          "type": "text",
-          "analyzer": "zentity_us_phone"
-        },
-        "hosp_affl": {
-          "type": "nested",
-          "properties": {
-            "ccn": {
-              "type": "keyword"
-            },
-            "lbn": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "initials": {
-                  "type": "text",
-                  "analyzer": "zentity_name_initials"
-                },
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
+        }
+      },
+      "org_pac_id": {
+        "type": "keyword"
+      },
+      "num_org_mem": {
+        "type": "integer"
+      },
+      "adr_ln_1": {
+        "type": "text",
+        "analyzer": "zentity_us_street"
+      },
+      "adr_ln_2": {
+        "type": "text",
+        "analyzer": "zentity_us_street"
+      },
+      "ln_2_sprs": {
+        "type": "boolean"
+      },
+      "cty": {
+        "type": "text",
+        "analyzer": "zentity_name"
+      },
+      "st": {
+        "type": "keyword"
+      },
+      "zip": {
+        "type": "text",
+        "analyzer": "zentity_us_postal_code"
+      },
+      "phn_numbr": {
+        "type": "text",
+        "analyzer": "zentity_us_phone"
+      },
+      "hosp_affl": {
+        "type": "nested",
+        "properties": {
+          "ccn": {
+            "type": "keyword"
+          },
+          "lbn": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "initials": {
+                "type": "text",
+                "analyzer": "zentity_name_initials"
+              },
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
               }
             }
           }
-        },
-        "assgn": {
-          "type": "boolean"
-        },
-        "pqrs": {
-          "type": "boolean"
-        },
-        "ehr": {
-          "type": "boolean"
-        },
-        "mhi": {
-          "type": "boolean"
         }
+      },
+      "assgn": {
+        "type": "boolean"
       }
     }
   }

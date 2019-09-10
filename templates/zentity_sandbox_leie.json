@@ -5,6 +5,7 @@
     "number_of_replicas": 0,
     "index.codec": "best_compression",
     "index.refresh_interval": "5s",
+    "index.translog.retention.age": "10s",
     "analysis": {
       "filter": {
         "zentity_clean_white": {
@@ -122,104 +123,99 @@
     }
   },
   "mappings": {
-    "_doc": {
-      "_all": {
-				"enabled": false
-			},
-      "properties": {
-        "lastname": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
+    "properties": {
+      "lastname": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
           }
-        },
-        "firstname": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
-          }
-        },
-        "midname": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
-          }
-        },
-        "busname": {
-          "type": "text",
-          "analyzer": "zentity_name",
-          "fields": {
-            "initials": {
-              "type": "text",
-              "analyzer": "zentity_name_initials"
-            },
-            "phonetic": {
-              "type": "text",
-              "analyzer": "zentity_name_phonetic"
-            }
-          }
-        },
-        "general": {
-          "type": "keyword"
-        },
-        "specialty": {
-          "type": "keyword"
-        },
-        "upin": {
-          "type": "keyword"
-        },
-        "npi": {
-          "type": "keyword"
-        },
-        "dob": {
-          "type": "date",
-          "format": "yyyyMMdd"
-        },
-        "address": {
-          "type": "text",
-          "analyzer": "zentity_us_street"
-        },
-        "city": {
-          "type": "text",
-          "analyzer": "zentity_name"
-        },
-        "state": {
-          "type": "keyword"
-        },
-        "zip": {
-          "type": "text",
-          "analyzer": "zentity_us_postal_code"
-        },
-        "excltype": {
-          "type": "keyword"
-        },
-        "excldate": {
-          "type": "date",
-          "format": "yyyyMMdd"
-        },
-        "reindate": {
-          "type": "date",
-          "format": "yyyyMMdd"
-        },
-        "waiverdate": {
-          "type": "date",
-          "format": "yyyyMMdd"
-        },
-        "wvrstate": {
-          "type": "keyword"
         }
+      },
+      "firstname": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
+          }
+        }
+      },
+      "midname": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
+          }
+        }
+      },
+      "busname": {
+        "type": "text",
+        "analyzer": "zentity_name",
+        "fields": {
+          "initials": {
+            "type": "text",
+            "analyzer": "zentity_name_initials"
+          },
+          "phonetic": {
+            "type": "text",
+            "analyzer": "zentity_name_phonetic"
+          }
+        }
+      },
+      "general": {
+        "type": "keyword"
+      },
+      "specialty": {
+        "type": "keyword"
+      },
+      "upin": {
+        "type": "keyword"
+      },
+      "npi": {
+        "type": "keyword"
+      },
+      "dob": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "address": {
+        "type": "text",
+        "analyzer": "zentity_us_street"
+      },
+      "city": {
+        "type": "text",
+        "analyzer": "zentity_name"
+      },
+      "state": {
+        "type": "keyword"
+      },
+      "zip": {
+        "type": "text",
+        "analyzer": "zentity_us_postal_code"
+      },
+      "excltype": {
+        "type": "keyword"
+      },
+      "excldate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "reindate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "waiverdate": {
+        "type": "date",
+        "format": "yyyyMMdd"
+      },
+      "wvrstate": {
+        "type": "keyword"
       }
     }
   }

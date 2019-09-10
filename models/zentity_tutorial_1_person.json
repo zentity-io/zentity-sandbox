@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    }
+  },
+  "resolvers": {
+    "name_only": {
+      "attributes": [ "first_name", "last_name" ]
+    }
+  },
+  "matchers": {
+    "simple": {
+      "clause": {
+        "match": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    }
+  },
+  "indices": {
+    "zentity_tutorial_1_exact_name_matching": {
+      "fields": {
+        "first_name": {
+          "attribute": "first_name",
+          "matcher": "simple"
+        },
+        "last_name": {
+          "attribute": "last_name",
+          "matcher": "simple"
+        }
+      }
+    }
+  }
+}

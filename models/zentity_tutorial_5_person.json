@@ -1,0 +1,147 @@
+{
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    }
+  },
+  "resolvers": {
+    "name_street_city_state": {
+      "attributes": [ "first_name", "last_name", "street", "city", "state" ]
+    },
+    "name_phone": {
+      "attributes": [ "first_name", "last_name", "phone" ]
+    },
+    "name_email": {
+      "attributes": [ "first_name", "last_name", "email" ]
+    },
+    "email_phone": {
+      "attributes": [ "email", "phone" ]
+    }
+  },
+  "matchers": {
+    "simple": {
+      "clause": {
+        "match": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    },
+    "fuzzy": {
+      "clause": {
+        "match": {
+          "{{ field }}": {
+            "query": "{{ value }}",
+            "fuzziness": "1"
+          }
+        }
+      }
+    },
+    "exact": {
+      "clause": {
+        "term": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    }
+  },
+  "indices": {
+    "zentity_tutorial_5_cross_index_resolution_a": {
+      "fields": {
+        "first_name_a.clean": {
+          "attribute": "first_name",
+          "matcher": "fuzzy"
+        },
+        "first_name_a.phonetic": {
+          "attribute": "first_name",
+          "matcher": "simple"
+        },
+        "last_name_a.clean": {
+          "attribute": "last_name",
+          "matcher": "fuzzy"
+        },
+        "last_name_a.phonetic": {
+          "attribute": "last_name",
+          "matcher": "simple"
+        },
+        "street_a.clean": {
+          "attribute": "street",
+          "matcher": "fuzzy"
+        },
+        "city_a.clean": {
+          "attribute": "city",
+          "matcher": "fuzzy"
+        },
+        "state_a.keyword": {
+          "attribute": "state",
+          "matcher": "exact"
+        },
+        "phone_a.clean": {
+          "attribute": "phone",
+          "matcher": "fuzzy"
+        },
+        "email_a.keyword": {
+          "attribute": "email",
+          "matcher": "exact"
+        }
+      }
+    },
+    "zentity_tutorial_5_cross_index_resolution_b": {
+      "fields": {
+        "first_name_b.clean": {
+          "attribute": "first_name",
+          "matcher": "fuzzy"
+        },
+        "first_name_b.phonetic": {
+          "attribute": "first_name",
+          "matcher": "simple"
+        },
+        "last_name_b.clean": {
+          "attribute": "last_name",
+          "matcher": "fuzzy"
+        },
+        "last_name_b.phonetic": {
+          "attribute": "last_name",
+          "matcher": "simple"
+        },
+        "street_b.clean": {
+          "attribute": "street",
+          "matcher": "fuzzy"
+        },
+        "city_b.clean": {
+          "attribute": "city",
+          "matcher": "fuzzy"
+        },
+        "state_b.keyword": {
+          "attribute": "state",
+          "matcher": "exact"
+        },
+        "phone_b.clean": {
+          "attribute": "phone",
+          "matcher": "fuzzy"
+        },
+        "email_b.keyword": {
+          "attribute": "email",
+          "matcher": "exact"
+        }
+      }
+    }
+  }
+}

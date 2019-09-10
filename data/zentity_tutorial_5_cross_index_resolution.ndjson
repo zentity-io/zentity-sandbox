@@ -1,0 +1,29 @@
+POST _bulk?refresh
+{"index": {"_id": "1", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "Washington", "email_a": "allie@example.net", "first_name_a": "Allie", "id_a": "1", "last_name_a": "Jones", "phone_a": "202-555-1234", "state_a": "DC", "street_a": "123 Main St"}
+{"index": {"_id": "2", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "Washington", "email_b": "", "first_name_b": "Alicia", "id_b": "2", "last_name_b": "Johnson", "phone_b": "202-123-4567", "state_b": "DC", "street_b": "300 Main St"}
+{"index": {"_id": "3", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "Washington", "email_a": "", "first_name_a": "Allie", "id_a": "3", "last_name_a": "Jones", "phone_a": "", "state_a": "DC", "street_a": "123 Main St"}
+{"index": {"_id": "4", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "", "email_b": "", "first_name_b": "Ally", "id_b": "4", "last_name_b": "Joans", "phone_b": "202-555-1234", "state_b": "", "street_b": ""}
+{"index": {"_id": "5", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "Arlington", "email_a": "ej@example.net", "first_name_a": "Eli", "id_a": "5", "last_name_a": "Jonas", "phone_a": "", "state_a": "VA", "street_a": "500 23rd Street"}
+{"index": {"_id": "6", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "Washington", "email_b": "allie@example.net", "first_name_b": "Allison", "id_b": "6", "last_name_b": "Jones", "phone_b": "202-555-1234", "state_b": "DC", "street_b": "123 Main St"}
+{"index": {"_id": "7", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "Washington", "email_a": "", "first_name_a": "Allison", "id_a": "7", "last_name_a": "Smith", "phone_a": "+1 (202) 555 1234", "state_a": "DC", "street_a": "555 Broad St"}
+{"index": {"_id": "8", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "Washington", "email_b": "alan.smith@example.net", "first_name_b": "Alan", "id_b": "8", "last_name_b": "Smith", "phone_b": "202-000-5555", "state_b": "DC", "street_b": "555 Broad St"}
+{"index": {"_id": "9", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "Washington", "email_a": "alan.smith@example.net", "first_name_a": "Alan", "id_a": "9", "last_name_a": "Smith", "phone_a": "2020005555", "state_a": "DC", "street_a": "555 Broad St"}
+{"index": {"_id": "10", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "Washington", "email_b": "", "first_name_b": "Alison", "id_b": "10", "last_name_b": "Smith", "phone_b": "202-555-9876", "state_b": "DC", "street_b": "555 Broad St"}
+{"index": {"_id": "11", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "", "email_a": "allie@example.net", "first_name_a": "Alison", "id_a": "11", "last_name_a": "Jones-Smith", "phone_a": "2025559867", "state_a": "", "street_a": ""}
+{"index": {"_id": "12", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "Washington", "email_b": "allison.j.smith@corp.example.net", "first_name_b": "Allison", "id_b": "12", "last_name_b": "Jones-Smith", "phone_b": "", "state_b": "DC", "street_b": "555 Broad St"}
+{"index": {"_id": "13", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
+{"city_a": "Arlington", "email_a": "allison.j.smith@corp.example.net", "first_name_a": "Allison", "id_a": "13", "last_name_a": "Jones Smith", "phone_a": "703-555-5555", "state_a": "VA", "street_a": "1 Corporate Way"}
+{"index": {"_id": "14", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}
+{"city_b": "Arlington", "email_b": "elise.jonas@corp.example.net", "first_name_b": "Elise", "id_b": "14", "last_name_b": "Jonas", "phone_b": "703-555-5555", "state_b": "VA", "street_b": "1 Corporate Way"}

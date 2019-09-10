@@ -1,0 +1,70 @@
+{
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    }
+  },
+  "resolvers": {
+    "name_phone": {
+      "attributes": [ "first_name", "last_name", "phone" ]
+    }
+  },
+  "matchers": {
+    "simple": {
+      "clause": {
+        "match": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    },
+    "fuzzy": {
+      "clause": {
+        "match": {
+          "{{ field }}": {
+            "query": "{{ value }}",
+            "fuzziness": "1"
+          }
+        }
+      }
+    },
+    "exact": {
+      "clause": {
+        "term": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    }
+  },
+  "indices": {
+    "zentity_tutorial_3_multiple_attribute_resolution": {
+      "fields": {
+        "first_name.clean": {
+          "attribute": "first_name",
+          "matcher": "fuzzy"
+        },
+        "first_name.phonetic": {
+          "attribute": "first_name",
+          "matcher": "simple"
+        },
+        "last_name.clean": {
+          "attribute": "last_name",
+          "matcher": "fuzzy"
+        },
+        "last_name.phonetic": {
+          "attribute": "last_name",
+          "matcher": "simple"
+        },
+        "phone.clean": {
+          "attribute": "phone",
+          "matcher": "fuzzy"
+        }
+      }
+    }
+  }
+}

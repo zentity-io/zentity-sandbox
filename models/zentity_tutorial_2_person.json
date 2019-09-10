@@ -1,0 +1,56 @@
+{
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    }
+  },
+  "resolvers": {
+    "name_only": {
+      "attributes": [ "first_name", "last_name" ]
+    }
+  },
+  "matchers": {
+    "simple": {
+      "clause": {
+        "match": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    },
+    "fuzzy": {
+      "clause": {
+        "match": {
+          "{{ field }}": {
+            "query": "{{ value }}",
+            "fuzziness": "1"
+          }
+        }
+      }
+    }
+  },
+  "indices": {
+    "zentity_tutorial_2_robust_name_matching": {
+      "fields": {
+        "first_name.clean": {
+          "attribute": "first_name",
+          "matcher": "fuzzy"
+        },
+        "first_name.phonetic": {
+          "attribute": "first_name",
+          "matcher": "simple"
+        },
+        "last_name.clean": {
+          "attribute": "last_name",
+          "matcher": "fuzzy"
+        },
+        "last_name.phonetic": {
+          "attribute": "last_name",
+          "matcher": "simple"
+        }
+      }
+    }
+  }
+}

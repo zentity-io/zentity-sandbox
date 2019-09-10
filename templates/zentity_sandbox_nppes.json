@@ -5,6 +5,7 @@
     "number_of_replicas": 0,
     "index.codec": "best_compression",
     "index.refresh_interval": "5s",
+    "index.translog.retention.age": "10s",
     "analysis": {
       "char_filter": {
         "zentity_phone_char_map": {
@@ -165,350 +166,345 @@
     }
   },
   "mappings": {
-    "_doc": {
-      "_all": {
-				"enabled": false
-			},
-      "properties": {
-        "number": {
-          "type": "keyword"
-        },
-        "enumeration_type": {
-          "type": "keyword"
-        },
-        "enumeration_type_code": {
-          "type": "keyword"
-        },
-        "basic": {
-          "properties": {
-            "replacement_npi": {
-              "type": "keyword"
-            },
-            "ein": {
-              "type": "keyword"
-            },
-            "enumeration_date": {
-              "type": "date",
-              "format": "MM/dd/yyyy"
-            },
-            "deactivation_date": {
-              "type": "date",
-              "format": "MM/dd/yyyy"
-            },
-            "deactivation_reason_code": {
-              "type": "keyword"
-            },
-            "reactivation_date": {
-              "type": "date",
-              "format": "MM/dd/yyyy"
-            },
-            "last_updated": {
-              "type": "date",
-              "format": "MM/dd/yyyy"
-            },
-            "organization_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "initials": {
-                  "type": "text",
-                  "analyzer": "zentity_name_initials"
-                },
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
+    "properties": {
+      "number": {
+        "type": "keyword"
+      },
+      "enumeration_type": {
+        "type": "keyword"
+      },
+      "enumeration_type_code": {
+        "type": "keyword"
+      },
+      "basic": {
+        "properties": {
+          "replacement_npi": {
+            "type": "keyword"
+          },
+          "ein": {
+            "type": "keyword"
+          },
+          "enumeration_date": {
+            "type": "date",
+            "format": "MM/dd/yyyy"
+          },
+          "deactivation_date": {
+            "type": "date",
+            "format": "MM/dd/yyyy"
+          },
+          "deactivation_reason_code": {
+            "type": "keyword"
+          },
+          "reactivation_date": {
+            "type": "date",
+            "format": "MM/dd/yyyy"
+          },
+          "last_updated": {
+            "type": "date",
+            "format": "MM/dd/yyyy"
+          },
+          "organization_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "initials": {
+                "type": "text",
+                "analyzer": "zentity_name_initials"
+              },
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
               }
-            },
-            "gender": {
-              "type": "keyword"
-            },
-            "last_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "first_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "middle_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "name_prefix": {
-              "type": "keyword"
-            },
-            "name_suffix": {
-              "type": "keyword"
-            },
-            "credential": {
-              "type": "keyword"
-            },
-            "authorized_official_last_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "authorized_official_first_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "authorized_official_middle_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "authorized_official_title_or_position": {
-              "type": "keyword"
-            },
-            "authorized_official_name_prefix": {
-              "type": "keyword"
-            },
-            "authorized_official_name_suffix": {
-              "type": "keyword"
-            },
-            "authorized_official_credential": {
-              "type": "keyword"
-            },
-            "authorized_official_telephone_number": {
-              "type": "text",
-              "analyzer": "zentity_us_phone"
-            },
-            "sole_proprietor": {
-              "type": "boolean"
-            },
-            "organizational_subpart": {
-              "type": "boolean"
-            },
-            "parent_organization_legal_business_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "initials": {
-                  "type": "text",
-                  "analyzer": "zentity_name_initials"
-                },
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "parent_organization_ein": {
-              "type": "keyword"
             }
-          }
-        },
-        "other_names": {
-          "properties": {
-            "organization_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "initials": {
-                  "type": "text",
-                  "analyzer": "zentity_name_initials"
-                },
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
+          },
+          "gender": {
+            "type": "keyword"
+          },
+          "last_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
               }
-            },
-            "code": {
-              "type": "keyword"
-            },
-            "last_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "first_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "middle_name": {
-              "type": "text",
-              "analyzer": "zentity_name",
-              "fields": {
-                "phonetic": {
-                  "type": "text",
-                  "analyzer": "zentity_name_phonetic"
-                }
-              }
-            },
-            "name_prefix": {
-              "type": "keyword"
-            },
-            "name_suffix": {
-              "type": "keyword"
-            },
-            "credential": {
-              "type": "keyword"
-            },
-            "type": {
-              "type": "keyword"
             }
-          }
-        },
-        "addresses": {
-          "properties": {
-            "mailing": {
-              "properties": {
-                "address_1": {
-                  "type": "text",
-                  "analyzer": "zentity_us_street"
-                },
-                "address_2": {
-                  "type": "text",
-                  "analyzer": "zentity_us_street"
-                },
-                "city": {
-                  "type": "text",
-                  "analyzer": "zentity_name"
-                },
-                "state": {
-                  "type": "keyword"
-                },
-                "postal_code": {
-                  "type": "text",
-                  "analyzer": "zentity_us_postal_code"
-                },
-                "country_code": {
-                  "type": "keyword"
-                },
-                "telephone_number": {
-                  "type": "text",
-                  "analyzer": "zentity_us_phone"
-                },
-                "fax_number": {
-                  "type": "text",
-                  "analyzer": "zentity_us_phone"
-                }
+          },
+          "first_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
               }
-            },
-            "location": {
-              "properties": {
-                "address_1": {
-                  "type": "text",
-                  "analyzer": "zentity_us_street"
-                },
-                "address_2": {
-                  "type": "text",
-                  "analyzer": "zentity_us_street"
-                },
-                "city": {
-                  "type": "text",
-                  "analyzer": "zentity_name"
-                },
-                "state": {
-                  "type": "keyword"
-                },
-                "postal_code": {
-                  "type": "text",
-                  "analyzer": "zentity_us_postal_code"
-                },
-                "country_code": {
-                  "type": "keyword"
-                },
-                "telephone_number": {
-                  "type": "text",
-                  "analyzer": "zentity_us_phone"
-                },
-                "fax_number": {
-                  "type": "text",
-                  "analyzer": "zentity_us_phone"
-                }
+            }
+          },
+          "middle_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "name_prefix": {
+            "type": "keyword"
+          },
+          "name_suffix": {
+            "type": "keyword"
+          },
+          "credential": {
+            "type": "keyword"
+          },
+          "authorized_official_last_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "authorized_official_first_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "authorized_official_middle_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "authorized_official_title_or_position": {
+            "type": "keyword"
+          },
+          "authorized_official_name_prefix": {
+            "type": "keyword"
+          },
+          "authorized_official_name_suffix": {
+            "type": "keyword"
+          },
+          "authorized_official_credential": {
+            "type": "keyword"
+          },
+          "authorized_official_telephone_number": {
+            "type": "text",
+            "analyzer": "zentity_us_phone"
+          },
+          "sole_proprietor": {
+            "type": "boolean"
+          },
+          "organizational_subpart": {
+            "type": "boolean"
+          },
+          "parent_organization_legal_business_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "initials": {
+                "type": "text",
+                "analyzer": "zentity_name_initials"
+              },
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "parent_organization_ein": {
+            "type": "keyword"
+          }
+        }
+      },
+      "other_names": {
+        "properties": {
+          "organization_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "initials": {
+                "type": "text",
+                "analyzer": "zentity_name_initials"
+              },
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "code": {
+            "type": "keyword"
+          },
+          "last_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "first_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "middle_name": {
+            "type": "text",
+            "analyzer": "zentity_name",
+            "fields": {
+              "phonetic": {
+                "type": "text",
+                "analyzer": "zentity_name_phonetic"
+              }
+            }
+          },
+          "name_prefix": {
+            "type": "keyword"
+          },
+          "name_suffix": {
+            "type": "keyword"
+          },
+          "credential": {
+            "type": "keyword"
+          },
+          "type": {
+            "type": "keyword"
+          }
+        }
+      },
+      "addresses": {
+        "properties": {
+          "mailing": {
+            "properties": {
+              "address_1": {
+                "type": "text",
+                "analyzer": "zentity_us_street"
+              },
+              "address_2": {
+                "type": "text",
+                "analyzer": "zentity_us_street"
+              },
+              "city": {
+                "type": "text",
+                "analyzer": "zentity_name"
+              },
+              "state": {
+                "type": "keyword"
+              },
+              "postal_code": {
+                "type": "text",
+                "analyzer": "zentity_us_postal_code"
+              },
+              "country_code": {
+                "type": "keyword"
+              },
+              "telephone_number": {
+                "type": "text",
+                "analyzer": "zentity_us_phone"
+              },
+              "fax_number": {
+                "type": "text",
+                "analyzer": "zentity_us_phone"
+              }
+            }
+          },
+          "location": {
+            "properties": {
+              "address_1": {
+                "type": "text",
+                "analyzer": "zentity_us_street"
+              },
+              "address_2": {
+                "type": "text",
+                "analyzer": "zentity_us_street"
+              },
+              "city": {
+                "type": "text",
+                "analyzer": "zentity_name"
+              },
+              "state": {
+                "type": "keyword"
+              },
+              "postal_code": {
+                "type": "text",
+                "analyzer": "zentity_us_postal_code"
+              },
+              "country_code": {
+                "type": "keyword"
+              },
+              "telephone_number": {
+                "type": "text",
+                "analyzer": "zentity_us_phone"
+              },
+              "fax_number": {
+                "type": "text",
+                "analyzer": "zentity_us_phone"
               }
             }
           }
-        },
-        "taxonomies": {
-          "type": "nested",
-          "properties": {
-            "code": {
-              "type": "keyword"
-            },
-            "license": {
-              "type": "keyword"
-            },
-            "state": {
-              "type": "keyword"
-            },
-            "primary": {
-              "type": "boolean"
-            },
-            "group_code": {
-              "type": "keyword"
-            },
-            "group": {
-              "type": "keyword"
-            }
+        }
+      },
+      "taxonomies": {
+        "type": "nested",
+        "properties": {
+          "code": {
+            "type": "keyword"
+          },
+          "license": {
+            "type": "keyword"
+          },
+          "state": {
+            "type": "keyword"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "group_code": {
+            "type": "keyword"
+          },
+          "group": {
+            "type": "keyword"
           }
-        },
-        "identifiers": {
-          "type": "nested",
-          "properties": {
-            "identifier": {
-              "type": "keyword"
-            },
-            "code": {
-              "type": "keyword"
-            },
-            "desc": {
-              "type": "keyword"
-            },
-            "state": {
-              "type": "keyword"
-            },
-            "issuer": {
-              "type": "keyword"
-            }
+        }
+      },
+      "identifiers": {
+        "type": "nested",
+        "properties": {
+          "identifier": {
+            "type": "keyword"
+          },
+          "code": {
+            "type": "keyword"
+          },
+          "desc": {
+            "type": "keyword"
+          },
+          "state": {
+            "type": "keyword"
+          },
+          "issuer": {
+            "type": "keyword"
           }
         }
       }

@@ -1,0 +1,142 @@
+{
+  "index_patterns": ["zentity_tutorial_5_cross_index_resolution_b*"],
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "analysis" : {
+        "filter" : {
+          "street_suffix_map" : {
+            "pattern" : "(st)",
+            "type" : "pattern_replace",
+            "replacement" : "street"
+          },
+          "phonetic" : {
+            "type" : "phonetic",
+            "encoder" : "nysiis"
+          },
+          "punct_white" : {
+            "pattern" : "\\p{Punct}",
+            "type" : "pattern_replace",
+            "replacement" : " "
+          },
+          "remove_non_digits" : {
+            "pattern" : "[^\\d]",
+            "type" : "pattern_replace",
+            "replacement" : ""
+          }
+        },
+        "analyzer" : {
+          "name_clean" : {
+            "filter" : [
+              "icu_normalizer",
+              "icu_folding",
+              "punct_white"
+            ],
+            "tokenizer" : "standard"
+          },
+          "name_phonetic" : {
+            "filter" : [
+              "icu_normalizer",
+              "icu_folding",
+              "punct_white",
+              "phonetic"
+            ],
+            "tokenizer" : "standard"
+          },
+          "street_clean" : {
+            "filter" : [
+              "icu_normalizer",
+              "icu_folding",
+              "punct_white",
+              "trim"
+            ],
+            "tokenizer" : "keyword"
+          },
+          "phone_clean" : {
+            "filter" : [
+              "remove_non_digits"
+            ],
+            "tokenizer" : "keyword"
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id_b": {
+        "type": "keyword"
+      },
+      "first_name_b": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "name_clean"
+          },
+          "phonetic": {
+            "type": "text",
+            "analyzer": "name_phonetic"
+          }
+        }
+      },
+      "last_name_b": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "name_clean"
+          },
+          "phonetic": {
+            "type": "text",
+            "analyzer": "name_phonetic"
+          }
+        }
+      },
+      "street_b": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "street_clean"
+          }
+        }
+      },
+      "city_b": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "name_clean"
+          }
+        }
+      },
+      "state_b": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "phone_b": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "phone_clean"
+          }
+        }
+      },
+      "email_b": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}

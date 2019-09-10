@@ -335,7 +335,7 @@ NPPES Row Structure
 import csv
 import json
 
-FILENAME_INPUT = "C:\\data\\nppes\\npidata_pfile_20050523-20190310.csv"
+FILENAME_INPUT = "C:\\data\\nppes\\npidata_pfile_20050523-20190811.csv"
 FILENAME_OUTPUT = "C:\\data\\nppes\\nppes.ndjson"
 
 def row_to_doc(row):
