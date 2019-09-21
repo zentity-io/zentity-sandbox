@@ -1,0 +1,72 @@
+{
+  "index_patterns": [ "zentity_tutorial_7_matcher_parameters*" ],
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "analysis" : {
+        "filter" : {
+          "punct_white" : {
+            "pattern" : "\\p{Punct}",
+            "type" : "pattern_replace",
+            "replacement" : " "
+          },
+          "remove_non_digits" : {
+            "pattern" : "[^\\d]",
+            "type" : "pattern_replace",
+            "replacement" : ""
+          }
+        },
+        "analyzer" : {
+          "name_clean" : {
+            "filter" : [
+              "lowercase",
+              "punct_white"
+            ],
+            "tokenizer" : "standard"
+          },
+          "phone_clean" : {
+            "filter" : [
+              "remove_non_digits"
+            ],
+            "tokenizer" : "keyword"
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "first_name": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "name_clean"
+          }
+        }
+      },
+      "last_name": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "name_clean"
+          }
+        }
+      },
+      "phone": {
+        "type": "text",
+        "fields": {
+          "clean": {
+            "type": "text",
+            "analyzer": "phone_clean"
+          }
+        }
+      }
+    }
+  }
+}

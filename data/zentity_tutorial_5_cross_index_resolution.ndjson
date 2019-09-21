@@ -1,4 +1,3 @@
-POST _bulk?refresh
 {"index": {"_id": "1", "_index": "zentity_tutorial_5_cross_index_resolution_a"}}
 {"city_a": "Washington", "email_a": "allie@example.net", "first_name_a": "Allie", "id_a": "1", "last_name_a": "Jones", "phone_a": "202-555-1234", "state_a": "DC", "street_a": "123 Main St"}
 {"index": {"_id": "2", "_index": "zentity_tutorial_5_cross_index_resolution_b"}}

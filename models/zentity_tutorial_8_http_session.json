@@ -1,0 +1,53 @@
+{
+  "attributes": {
+    "timestamp": {
+      "type": "date"
+    },
+    "ip": {
+      "type": "string"
+    }
+  },
+  "resolvers": {
+    "timestamp_ip": {
+      "attributes": [ "timestamp", "ip" ]
+    }
+  },
+  "matchers": {
+    "exact": {
+      "clause": {
+        "term": {
+          "{{ field }}": "{{ value }}"
+        }
+      }
+    },
+    "time_range": {
+      "clause": {
+        "range": {
+          "{{ field }}": {
+            "gte": "{{ value }}||-{{ params.window }}",
+            "lte": "{{ value }}||+{{ params.window }}",
+            "format": "{{ params.format }}"
+          }
+        }
+      },
+      "params": {
+        "format": "yyyy-MM-dd'T'HH:mm:ss.SSS",
+        "window": "15m"
+      }
+    }
+  },
+  "indices": {
+    "zentity_tutorial_8_date_attributes": {
+      "fields": {
+        "@timestamp": {
+          "attribute": "timestamp",
+          "matcher": "time_range"
+        },
+        "ip": {
+          "attribute": "ip",
+          "matcher": "exact"
+        }
+      }
+    }
+  }
+}

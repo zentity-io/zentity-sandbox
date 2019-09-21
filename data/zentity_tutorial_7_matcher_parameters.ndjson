@@ -1,0 +1,10 @@
+{"index": {"_id": "1", "_index": "zentity_tutorial_7_matcher_parameters"}}
+{"first_name": "Allie", "id": "1", "last_name": "Jones", "phone": "202-555-1234"}
+{"index": {"_id": "2", "_index": "zentity_tutorial_7_matcher_parameters"}}
+{"first_name": "Alicia", "id": "2", "last_name": "Johnson", "phone": "202-123-4567"}
+{"index": {"_id": "3", "_index": "zentity_tutorial_7_matcher_parameters"}}
+{"first_name": "Allie", "id": "3", "last_name": "Joans", "phone": "202-555-1432"}
+{"index": {"_id": "4", "_index": "zentity_tutorial_7_matcher_parameters"}}
+{"first_name": "Ellie", "id": "4", "last_name": "Jones", "phone": "202-555-1234"}
+{"index": {"_id": "5", "_index": "zentity_tutorial_7_matcher_parameters"}}
+{"first_name": "Ali", "id": "5", "last_name": "Jones", "phone": "202-555-1234"}

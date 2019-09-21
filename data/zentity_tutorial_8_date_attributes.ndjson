@@ -1,0 +1,36 @@
+{"index": {"_id": "1", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:01:45.248", "id": "1", "ip": "192.168.0.1", "path": "/"}
+{"index": {"_id": "2", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:02:05.658", "id": "2", "ip": "192.168.0.1", "path": "/docs"}
+{"index": {"_id": "3", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:02:08.782", "id": "3", "ip": "192.168.2.1", "path": "/"}
+{"index": {"_id": "4", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:02:12.024", "id": "4", "ip": "192.168.0.1", "path": "/docs/installation"}
+{"index": {"_id": "5", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:02:27.745", "id": "5", "ip": "192.168.2.1", "path": "/"}
+{"index": {"_id": "6", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:02:15.628", "id": "6", "ip": "192.168.0.1", "path": "/releases"}
+{"index": {"_id": "7", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:14:01.956", "id": "7", "ip": "192.168.0.1", "path": "/docs"}
+{"index": {"_id": "8", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:14:08.345", "id": "8", "ip": "192.168.3.1", "path": "/"}
+{"index": {"_id": "9", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:14:08.921", "id": "9", "ip": "192.168.0.1", "path": "/docs/installation"}
+{"index": {"_id": "10", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:21:00.003", "id": "10", "ip": "192.168.2.1", "path": "/"}
+{"index": {"_id": "11", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:22:07.565", "id": "11", "ip": "192.168.2.1", "path": "/"}
+{"index": {"_id": "12", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:28:11.114", "id": "12", "ip": "192.168.0.1", "path": "/docs/basic-usage"}
+{"index": {"_id": "13", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-02-28T23:30:45.346", "id": "13", "ip": "192.168.3.1", "path": "/docs/releases"}
+{"index": {"_id": "14", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-03-01T10:30:45.982", "id": "14", "ip": "192.168.4.1", "path": "/"}
+{"index": {"_id": "15", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-03-02T12:30:45.452", "id": "15", "ip": "192.168.0.1", "path": "/"}
+{"index": {"_id": "16", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-03-03T14:32:01.837", "id": "16", "ip": "192.168.0.1", "path": "/"}
+{"index": {"_id": "17", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-03-03T14:32:03.897", "id": "17", "ip": "192.168.0.1", "path": "/releases"}
+{"index": {"_id": "18", "_index": "zentity_tutorial_8_date_attributes"}}
+{"@timestamp": "2019-03-03T12:33:56.553", "id": "18", "ip": "192.168.0.1", "path": "/docs"}
