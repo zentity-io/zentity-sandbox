@@ -1,25 +1,32 @@
 {
   "attributes" : {
     "id" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.95
     },
     "name" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.75
     },
     "phone" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.85
     },
     "street" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.75
     },
     "city" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.55
     },
     "state" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.5125
     },
     "postal_code" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.55
     }
   },
   "resolvers" : {
@@ -73,7 +80,8 @@
       },
       "params" : {
         "fuzziness" : 1
-      }
+      },
+      "quality" : 0.95
     },
     "match_fuzzy_and_initials" : {
       "clause" : {
@@ -100,14 +108,16 @@
       },
       "params" : {
         "fuzziness" : 1
-      }
+      },
+      "quality" : 0.975
     },
     "term" : {
       "clause" : {
         "term" : {
           "{{ field }}" : "{{ value }}"
         }
-      }
+      },
+      "quality" : 1.0
     }
   },
   "indices" : {
@@ -123,7 +133,8 @@
         },
         "busname.phonetic" : {
           "attribute" : "name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "address" : {
           "attribute" : "street",
@@ -155,7 +166,8 @@
         },
         "basic.organization_name.phonetic" : {
           "attribute" : "name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "addresses.location.telephone_number" : {
           "attribute" : "phone",
@@ -191,7 +203,8 @@
         },
         "org_name.phonetic" : {
           "attribute" : "name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "state_cd" : {
           "attribute" : "state",
@@ -211,7 +224,8 @@
         },
         "org_nm.phonetic" : {
           "attribute" : "name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "adr_ln_1" : {
           "attribute" : "street",

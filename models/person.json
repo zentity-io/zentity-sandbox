@@ -1,28 +1,36 @@
 {
   "attributes" : {
     "id" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.95
     },
     "first_name" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.6125
     },
     "last_name" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.65
     },
     "phone" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.85
     },
     "street" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.75
     },
     "city" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.55
     },
     "state" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.5125
     },
     "postal_code" : {
-      "type" : "string"
+      "type" : "string",
+      "score" : 0.55
     }
   },
   "resolvers" : {
@@ -68,21 +76,24 @@
       },
       "params" : {
         "fuzziness" : 1
-      }
+      },
+      "quality" : 0.95
     },
     "match" : {
       "clause" : {
         "match" : {
           "{{ field }}" : "{{ value }}"
         }
-      }
+      },
+      "quality" : 0.99
     },
     "term" : {
       "clause" : {
         "term" : {
           "{{ field }}" : "{{ value }}"
         }
-      }
+      },
+      "quality" : 1.0
     }
   },
   "indices" : {
@@ -98,7 +109,8 @@
         },
         "firstname.phonetic" : {
           "attribute" : "first_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "lastname" : {
           "attribute" : "last_name",
@@ -106,7 +118,8 @@
         },
         "lastname.phonetic" : {
           "attribute" : "last_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "address" : {
           "attribute" : "street",
@@ -138,7 +151,8 @@
         },
         "basic.first_name.phonetic" : {
           "attribute" : "first_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "basic.last_name" : {
           "attribute" : "last_name",
@@ -146,7 +160,8 @@
         },
         "basic.last_name.phonetic" : {
           "attribute" : "last_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "addresses.location.telephone_number" : {
           "attribute" : "phone",
@@ -182,7 +197,8 @@
         },
         "first_name.phonetic" : {
           "attribute" : "first_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "last_name" : {
           "attribute" : "last_name",
@@ -190,7 +206,8 @@
         },
         "last_name.phonetic" : {
           "attribute" : "last_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "state_cd" : {
           "attribute" : "state",
@@ -210,7 +227,8 @@
         },
         "frst_nm.phonetic" : {
           "attribute" : "first_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "lst_nm" : {
           "attribute" : "last_name",
@@ -218,7 +236,8 @@
         },
         "lst_nm.phonetic" : {
           "attribute" : "last_name",
-          "matcher" : "match"
+          "matcher" : "match",
+          "quality" : 0.925
         },
         "adr_ln_1" : {
           "attribute" : "street",
