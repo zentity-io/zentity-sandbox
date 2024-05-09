@@ -14,12 +14,11 @@ services:
     user: elasticsearch
     environment:
       bootstrap.memory_lock: true
-      cluster.name: zentity-sandbox
       cluster.initial_master_nodes: elasticsearch
+      cluster.name: zentity-sandbox
       node.name: elasticsearch
       xpack.license.self_generated.type: basic
       xpack.security.enabled: false
-      reindex.remote.whitelist: host.docker.internal:9800
     mem_limit: 1gb
     ulimits:
       memlock:
