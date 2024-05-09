@@ -1,0 +1,89 @@
+# zentity - API Demo
+#
+# zentity is an open-source community plugin that brings
+# real-time entity resolution to Elasticsearch.
+#
+# Website: https://zentity.io
+# Github:  https://github.com/zentity-io/zentity
+
+
+####  Entity Models  ########################################
+
+GET _zentity/models/organization
+
+
+####  Entity Resolution  ####################################
+
+POST _zentity/resolution/organization?_source=false
+{
+  "attributes": {
+    "id": [ "1497077796" ]
+  }
+}
+
+POST _zentity/resolution/organization?_source=true
+{
+  "attributes": {
+    "id": [ "1497077796" ]
+  }
+}
+
+POST _zentity/resolution/organization?_source=false&_explanation=true
+{
+  "attributes": {
+    "id": [ "1497077796" ]
+  }
+}
+
+POST _zentity/resolution/organization?_source=false&_explanation=true
+{
+  "terms": [ "CLINICAL SUPPORT SERVICES, LLC", "55401" ]
+}
+
+
+####  Entity Resolution: Debugging  #########################
+
+POST _zentity/resolution/organization?hits=false&queries=true
+{
+  "attributes": {
+    "id": [ "1497077796" ]
+  }
+}
+
+POST _zentity/resolution/organization?hits=false&queries=true&_explanation=true
+{
+  "attributes": {
+    "id": [ "1497077796" ]
+  }
+}
+
+POST _zentity/resolution/organization?hits=false&queries=true&profile=true
+{
+  "attributes": {
+    "id": [ "1497077796" ]
+  }
+}
+
+
+####  Custom Analyzers: Mappings  ###########################
+
+GET zentity_sandbox_nppes/_settings
+GET zentity_sandbox_nppes/_mappings
+
+
+####  Custom Analyzers: Examples  ###########################
+
+POST zentity_sandbox_nppes/_analyze
+{ "text": "Alice Jones-Smith", "analyzer": "zentity_name" }
+
+POST zentity_sandbox_nppes/_analyze
+{ "text": "Alice Jones-Smith", "analyzer": "zentity_name_phonetic" }
+
+POST zentity_sandbox_nppes/_analyze
+{ "text": "Alicia Jane-Smith", "analyzer": "zentity_name_phonetic" }
+
+POST zentity_sandbox_nppes/_analyze
+{ "text": "39630 W 14 MILE RD", "analyzer": "zentity_us_street" }
+
+POST zentity_sandbox_nppes/_analyze
+{ "text": "123 St Paul St", "analyzer": "zentity_us_street" }
